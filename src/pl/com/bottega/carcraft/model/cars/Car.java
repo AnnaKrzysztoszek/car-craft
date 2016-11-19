@@ -9,7 +9,7 @@ import static java.lang.Math.pow;
 /**
  * Created by anna on 05.11.2016.
  */
-public class Car {
+public class Car<L> {
 
     static final double FUEL_CAPACITY = 60;
     private static final int DEFAULT_DISTANCE = 1;
@@ -26,6 +26,8 @@ public class Car {
     private String name;
 
     private BodyType bodyType;
+
+    private L load;
 
     Car(BodyType bodyType, Engine engine, String name, double fuelLevel) {
         this(bodyType, engine, name, fuelLevel, 0, 0);
@@ -184,13 +186,22 @@ public class Car {
         return bodyType.getDoorsCount();
     }
 
+    public void put(L load) {
+        this.load = load;
+    }
+
+    public L pop() {
+        return load;
+    }
+
     @Override
     public String toString() {
         //StringBuilder - nieodporny na wątki
         //StringBuffer - odporny na watki, wolniejszy
-        StringBuilder sb = new StringBuilder();
-        return sb.append("x=").append(x).append(" ").toString();
-        //return "x=" + x + " y=" + y;
+        //StringBuilder sb = new StringBuilder();
+        //return sb.append("x=").append(x).append(" ").toString();
+        String loadString = load == null ? "empty" : load.toString();
+        return "x=" + x + " y=" + y + "f= " + fuelLevel + " l=" + loadString;
     }
 
 

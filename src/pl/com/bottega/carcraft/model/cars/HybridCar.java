@@ -7,7 +7,7 @@ import pl.com.bottega.carcraft.model.engines.electric.ElectricEngine;
 /**
  * Created by anna on 13.11.2016.
  */
-public class HybridCar extends Car {
+public class HybridCar<L> extends Car<L> {
 
     private static final double ENERGY_CAPACITY = 85;
 

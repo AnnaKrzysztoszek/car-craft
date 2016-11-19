@@ -17,7 +17,7 @@ public class CarsFactory {
      * @return
      * @throws IllegalArgumentException
      */
-    public static Car create(String model, int x, int y, double fuelPercentage) throws IllegalArgumentException {
+    public static <L> Car <L> create(String model, int x, int y, double fuelPercentage, L load) throws IllegalArgumentException {
         if (x < 0 || y < 0)
             throw new IllegalArgumentException("Coordinates can not be negative");
         if (fuelPercentage < 0 || fuelPercentage > 100)
@@ -25,15 +25,24 @@ public class CarsFactory {
 
         double fuelLevel = Car.FUEL_CAPACITY * fuelPercentage / 100;
 
+        Car<L> car;
         switch (model) {
             case "prius":
-                return new HybridCar(BodyType.HATCHBACK, new BMW_N55(), new ElectricEngine(), "bazyliszek", fuelLevel, 10, x, y);
+                car =  new HybridCar(BodyType.HATCHBACK, new BMW_N55(), new ElectricEngine(), "bazyliszek", fuelLevel, 10, x, y);
+                car.put(load);
+                return car;
             case "i8":
-                return new HybridCar(BodyType.COMBI, new BMW_N55(), new ElectricEngine(), "spaceship", fuelLevel, 3, x, y);
+                car = new HybridCar(BodyType.COMBI, new BMW_N55(), new ElectricEngine(), "spaceship", fuelLevel, 3, x, y);
+                car.put(load);
+                return car;
             case "mustang":
-                return new HybridCar(BodyType.SEDAN, new V8(), new ElectricEngine(), "mustang", fuelLevel, 4, x, y);
+                car = new HybridCar(BodyType.SEDAN, new V8(), new ElectricEngine(), "mustang", fuelLevel, 4, x, y);
+                car.put(load);
+                return car;
             case "911":
-                return new HybridCar(BodyType.SUV, new Boxer6(), new ElectricEngine(), "911", fuelLevel, 5, x, y);
+                car = new HybridCar(BodyType.SUV, new Boxer6(), new ElectricEngine(), "911", fuelLevel, 5, x, y);
+                car.put(load);
+                return car;
             default:
                 throw new IllegalArgumentException("model " + model + " is unknown");
         }

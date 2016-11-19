@@ -7,6 +7,7 @@ import pl.com.bottega.carcraft.model.cars.HybridCar;
 import pl.com.bottega.carcraft.model.engines.combustion.BMW_N55;
 import pl.com.bottega.carcraft.model.engines.Engine;
 import pl.com.bottega.carcraft.model.engines.electric.ElectricEngine;
+import pl.com.bottega.carcraft.model.sandbox.Present;
 
 import java.io.IOException;
 import java.util.Random;
@@ -19,14 +20,14 @@ public class Start {
     private static boolean[][] map = new boolean[20][20];
 
     public static void main(String[] args){
-        Car slowCar = null;
-        Car fastCar = null;
+        Car<Present> slowCar = null;
+        Car<String> fastCar = null;
         try {
 
-            slowCar = CarsFactory.create("prius", 1, 1, 30);
+            slowCar = CarsFactory.create("prius", 1, 1, 30, new Present("różowy", 50));
             //new HybridCar(new BMW_N55(), new ElectricEngine(), "prius", 30, 40, 1, 1);
 
-            fastCar = CarsFactory.create("i8", 3, 4, 20);
+            fastCar = CarsFactory.create("i8", 3, 4, 20, "Fancy macBook");
             fastCar.run();
         }
         catch (IllegalArgumentException ex){
@@ -74,6 +75,9 @@ public class Start {
                         break;
                     case 'q':
                         go = false;
+                        break;
+                    case 'l':
+                        fastCar.put("nowy ładunenk");
                         break;
                     default:
                         fastCar.moveTo(random.nextInt(maxX), random.nextInt(maxY));//ruch w losowe miejsce
