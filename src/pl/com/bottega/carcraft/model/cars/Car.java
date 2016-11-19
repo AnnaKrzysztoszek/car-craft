@@ -1,6 +1,10 @@
 package pl.com.bottega.carcraft.model.cars;
 
+import com.sun.deploy.util.StringUtils;
+import pl.com.bottega.carcraft.model.Human;
 import pl.com.bottega.carcraft.model.engines.Engine;
+
+import java.util.*;
 
 import static java.lang.Math.sqrt;
 import static java.lang.Math.pow;
@@ -27,7 +31,9 @@ public class Car<L> {
 
     private BodyType bodyType;
 
-    private L load;
+    private Collection<L> load = new ArrayList<>();
+
+    private Set<Human> passengers = new HashSet<>();
 
     Car(BodyType bodyType, Engine engine, String name, double fuelLevel) {
         this(bodyType, engine, name, fuelLevel, 0, 0);
@@ -187,11 +193,14 @@ public class Car<L> {
     }
 
     public void put(L load) {
-        this.load = load;
+        this.load.add(load);
     }
 
-    public L pop() {
-        return load;
+    public Collection<L> pop() {
+        Collection<L> tmp = new ArrayList<>();
+        tmp.addAll(load);
+        load.clear();
+        return tmp;
     }
 
     @Override
@@ -200,8 +209,11 @@ public class Car<L> {
         //StringBuffer - odporny na watki, wolniejszy
         //StringBuilder sb = new StringBuilder();
         //return sb.append("x=").append(x).append(" ").toString();
-        String loadString = load == null ? "empty" : load.toString();
-        return "x=" + x + " y=" + y + "f= " + fuelLevel + " l=" + loadString;
+        return "x=" + x + " y=" + y + " f= " + fuelLevel + " l=" + loadString(load);
+    }
+
+    public String loadString(Collection<L> load) {
+        return load.isEmpty() ? "empty" : StringUtils.join(load, ", ");
     }
 
 

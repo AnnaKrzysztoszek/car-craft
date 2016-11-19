@@ -21,7 +21,7 @@ public class PostOffice {
         //--------------
         Box<Present, String> coffeeBox = new Box<>(5000);
         coffeeBox.put(new Present("kawa w ziarnach", 500));
-        Box<Coffee, String> mixedCoffee = coffeeBox.change(new CoffeeMixer());
+        Box<Sieczka, String> mixedCoffee = coffeeBox.change(new UtylizatorPrezentow());
     }
 
     public static void send(Box<Present, String> box) {

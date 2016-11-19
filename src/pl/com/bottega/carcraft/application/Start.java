@@ -1,5 +1,6 @@
 package pl.com.bottega.carcraft.application;
 
+import com.sun.deploy.util.StringUtils;
 import pl.com.bottega.carcraft.model.cars.Car;
 import pl.com.bottega.carcraft.model.cars.CarsFactory;
 import pl.com.bottega.carcraft.model.cars.FuelException;
@@ -10,8 +11,7 @@ import pl.com.bottega.carcraft.model.engines.electric.ElectricEngine;
 import pl.com.bottega.carcraft.model.sandbox.Present;
 
 import java.io.IOException;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by Slawek on 05/11/16.
@@ -77,7 +77,11 @@ public class Start {
                         go = false;
                         break;
                     case 'l':
-                        fastCar.put("nowy ładunenk");
+                        fastCar.put(new Integer(random.nextInt()).toString());
+                        break;
+                    case 'u':
+                        Collection<String> unloaded = fastCar.pop();
+                        System.out.println(fastCar.loadString(unloaded));
                         break;
                     default:
                         fastCar.moveTo(random.nextInt(maxX), random.nextInt(maxY));//ruch w losowe miejsce
