@@ -28,19 +28,19 @@ public class CarsFactory {
         Car<L> car;
         switch (model) {
             case "prius":
-                car =  new HybridCar(BodyType.HATCHBACK, new BMW_N55(), new ElectricEngine(), "bazyliszek", fuelLevel, 10, x, y);
+                car =  new HybridCar<L>(BodyType.HATCHBACK, new BMW_N55(), new ElectricEngine(), "bazyliszek", fuelLevel, 10, x, y);
                 car.put(load);
                 return car;
             case "i8":
-                car = new HybridCar(BodyType.COMBI, new BMW_N55(), new ElectricEngine(), "spaceship", fuelLevel, 3, x, y);
+                car = new HybridCar<L>(BodyType.COMBI, new BMW_N55(), new ElectricEngine(), "spaceship", fuelLevel, 3, x, y);
                 car.put(load);
                 return car;
             case "mustang":
-                car = new HybridCar(BodyType.SEDAN, new V8(), new ElectricEngine(), "mustang", fuelLevel, 4, x, y);
+                car = new HybridCar<L>(BodyType.SEDAN, new V8(), new ElectricEngine(), "mustang", fuelLevel, 4, x, y);
                 car.put(load);
                 return car;
             case "911":
-                car = new HybridCar(BodyType.SUV, new Boxer6(), new ElectricEngine(), "911", fuelLevel, 5, x, y);
+                car = new HybridCar<L>(BodyType.SUV, new Boxer6(), new ElectricEngine(), "911", fuelLevel, 5, x, y);
                 car.put(load);
                 return car;
             default:
